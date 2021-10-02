@@ -9,7 +9,7 @@
         <h1 style="text-align: center;">What is the size of the matrix?</h1>
         <form method="POST" style="text-align: center;">
             {% csrf_token %}
-            <input type="hidden" name="page_number" value="1">
+            <input type="hidden" name="form_submitted" value="matrix_size">
             <select name="m">
                 <option value="1">1</option>
                 <option value="2" selected>2</option>
