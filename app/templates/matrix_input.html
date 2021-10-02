@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Linear Equation Solver</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'matrix_style.css' %}">
+    </head>
+    <body>
+        <h1 style="text-align: center;">Fill in the entries:</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="form_submitted" value="matrix">
+            <table class="matrix">
+                {% for i in range_m %}
+                    <tr>
+                        {% for j in range_n %}
+                            <td><input type="text" size="1" name="a_{{i}}_{{j}}"></td>
+                        {%  endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+            &nbsp;
+            <div style="text-align: center;"><input type="submit" value="Submit"></div>
+        </form>
+    </body>
+</html>

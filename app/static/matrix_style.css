@@ -1,0 +1,16 @@
+.matrix{
+    border-left: 2px solid #000;
+    border-right: 2px solid #000;
+    padding-left: 3px;
+    padding-right: 3px;
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+    margin: 0 auto;
+}
+.matrix tr td{
+    height: 30px;
+    width: 35px;
+    text-align: center;
+}
