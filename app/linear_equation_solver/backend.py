@@ -24,7 +24,7 @@ class RowOpSeq:
         self.mat_seq+=[simplify(self.mat_seq[-1].elementary_row_op(**row_op))]
         
 
-def find_RREF(A):
+def row_op_toward_RREF(A):
     #Let m=number of rows of A, n=number of columns of A
     m=A.shape[0]
     n=A.shape[1]
