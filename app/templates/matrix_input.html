@@ -11,6 +11,8 @@
         <form method="POST">
             {% csrf_token %}
             <input type="hidden" name="form_submitted" value="matrix">
+            <input type="hidden" name="m" value="{{ m }}">
+            <input type="hidden" name="n" value="{{ n }}">
             <table class="matrix">
                 {% for i in range_m %}
                     <tr>
