@@ -22,4 +22,4 @@ def index(request):
                     row.append(request.POST.dict()['a_'+str(i)+'_'+str(j)])
                 A.append(row)
             from .linear_equation_solver import find_solution
-            return render(request, 'display_row_operations.html', context={'row_op':find_solution(A)})
+            return render(request, 'interactive_row_operations.html')
