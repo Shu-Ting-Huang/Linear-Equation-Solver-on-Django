@@ -29,4 +29,5 @@ from django.views.decorators.clickjacking import xframe_options_sameorigin
 @xframe_options_sameorigin
 
 def simple_row_ops(request):
-    return render(request, 'simple_row_ops.html')
+    n = 15
+    return render(request, 'simple_row_ops.html', context={'range_n':range(1,n+1)})

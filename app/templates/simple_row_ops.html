@@ -6,10 +6,20 @@
     </head>
     <body>
         $$
-        \begin{pmatrix}
-        1 & 0 \\[4pt]
-        0 & 0
-        \end{pmatrix}
+        \begin{align*}
+        {% for i in range_n %}
+            {% if not forloop.first %}
+                \longrightarrow
+            {% endif %}
+            \begin{pmatrix}        
+            {{i}} & 0 \\[4pt]
+            0       & 0
+            \end{pmatrix}&
+            {% if not forloop.last %}
+                \\
+            {% endif %}
+        {% endfor %}
+        \end{align*}
         $$
     </body>
 </html>
