@@ -23,3 +23,6 @@ def index(request):
                 A.append(row)
             from .linear_equation_solver import find_solution
             return render(request, 'interactive_row_operations.html')
+
+def simple_row_ops(request):
+    return render(request, 'simple_row_ops.html')
