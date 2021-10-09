@@ -24,5 +24,9 @@ def index(request):
             from .linear_equation_solver import find_solution
             return render(request, 'interactive_row_operations.html')
 
+# Allow the simple_row_ops.html to be shown in iframe
+from django.views.decorators.clickjacking import xframe_options_sameorigin
+@xframe_options_sameorigin
+
 def simple_row_ops(request):
     return render(request, 'simple_row_ops.html')
