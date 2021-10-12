@@ -6,13 +6,26 @@
         {% load static %}
         <link rel="stylesheet" href="{% static 'matrix_style.css' %}">
         <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+        <script>
+            var n = 15;
+            function increase_n() {
+                n = n + 1;
+                document.getElementById('iframe').src = "/simple_row_ops?n=" + n;
+                // document.getElementById('iframe').contentWindow.location.reload();
+            }
+            function decrease_n() {
+                n = n - 1;
+                document.getElementById('iframe').src = "/simple_row_ops?n=" + n;
+                // document.getElementById('iframe').contentWindow.location.reload();
+            }
+        </script>
     </head>
     <body>
         <h1 style="text-align: center;">Interactive row operations</h1>
         <!-- https://stackoverflow.com/questions/1192228/scrolling-an-iframe-with-javascript -->
-        <iframe id="iframe" src="/simple_row_ops" width="70%" height="400px"></iframe>
-        <button type="button">Last Step</button>
-        <button type="button">Next Step</button>
+        <iframe id="iframe" src="/simple_row_ops?n=15" width="70%" height="400px"></iframe>
+        <button type="button" onclick="decrease_n()">Last Step</button>
+        <button type="button" onclick="increase_n()">Next Step</button>
         <p style="text-align: center;">The style of these matrices is encoded using <a href="https://www.mathjax.org/" target="_blank">MathJax</a></p>
     </body>
 </html>
