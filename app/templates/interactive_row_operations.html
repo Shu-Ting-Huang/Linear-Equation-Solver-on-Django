@@ -23,9 +23,17 @@
     <body>
         <h1 style="text-align: center;">Interactive row operations</h1>
         <!-- https://stackoverflow.com/questions/1192228/scrolling-an-iframe-with-javascript -->
-        <iframe id="iframe" src="/simple_row_ops?n=15" width="70%" height="400px"></iframe>
-        <button type="button" onclick="decrease_n()">Last Step</button>
-        <button type="button" onclick="increase_n()">Next Step</button>
+        <!-- https://stackoverflow.com/questions/68793333/html-iframe-and-paragraph-on-the-same-line -->
+        <div style="display:flex; flex-wrap:nowrap;">
+            <div>
+                <iframe id="iframe" src="/simple_row_ops?n=15" width="70%" height="400px"></iframe>
+            </div>
+            <div>
+                <button type="button" onclick="decrease_n()">Last Step</button>
+                <button type="button" onclick="increase_n()">Next Step</button>
+            </div>
+        </div>
+        
         <p style="text-align: center;">The style of these matrices is encoded using <a href="https://www.mathjax.org/" target="_blank">MathJax</a></p>
     </body>
 </html>
