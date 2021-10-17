@@ -10,10 +10,12 @@ def index(request):
         if request.POST['form_submitted'] == 'matrix_size':
             m = int(request.POST['m'])
             n = int(request.POST['n'])
-            return render(request, 'matrix_input.html', context={'range_m':range(m),'range_n':range(n),'m':m,'n':n})
+            request.session['m'] = m # Need to run python manage.py migrate before deploying
+            request.session['n'] = n
+            return render(request, 'matrix_input.html', context={'range_m':range(m),'range_n':range(n)})
         elif request.POST['form_submitted'] == 'matrix':
-            m = int(request.POST['m'])
-            n = int(request.POST['n'])
+            m = request.session['m']
+            n = request.session['n']
             # store the matrix in the variable A
             A = []
             for i in range(m):
