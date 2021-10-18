@@ -8,15 +8,18 @@
         <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
         <script>
             var n = 1;
+            var max_step = 20;
             function increase_n() {
-                n = n + 1;
-                document.getElementById('iframe').src = "/simple_row_ops?n=" + n;
-                // document.getElementById('iframe').contentWindow.location.reload();
+                if (n < max_step) {
+                    n += 1;
+                    document.getElementById('iframe').src = "/simple_row_ops?n=" + n;
+                }
             }
             function decrease_n() {
-                n = n - 1;
-                document.getElementById('iframe').src = "/simple_row_ops?n=" + n;
-                // document.getElementById('iframe').contentWindow.location.reload();
+                if (n > 1) {
+                    n -= 1;
+                    document.getElementById('iframe').src = "/simple_row_ops?n=" + n;
+                }
             }
         </script>
     </head>
