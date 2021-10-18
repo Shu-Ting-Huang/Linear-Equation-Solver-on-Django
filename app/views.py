@@ -8,12 +8,12 @@ def index(request):
         return render(request, 'matrix_size_input.html')
     elif request.method == 'POST':
         if request.POST['form_submitted'] == 'matrix_size':
-            m = int(request.POST['m'])
-            n = int(request.POST['n'])
-            return render(request, 'matrix_input.html', context={'range_m':range(m),'range_n':range(n),'m':m,'n':n})
+            m = request.session['m'] = int(request.POST['m'])
+            n = request.session['n'] = int(request.POST['n'])
+            return render(request, 'matrix_input.html', context={'range_m':range(m),'range_n':range(n)})
         elif request.POST['form_submitted'] == 'matrix':
-            m = int(request.POST['m'])
-            n = int(request.POST['n'])
+            m = request.session['m']
+            n = request.session['n']
             # store the matrix in the variable A
             A = []
             for i in range(m):
@@ -21,6 +21,7 @@ def index(request):
                 for j in range(n):
                     row.append(request.POST.dict()['a_'+str(i)+'_'+str(j)])
                 A.append(row)
+            request.session['A'] = A
             from .linear_equation_solver import find_solution
             return render(request, 'interactive_row_operations.html')
 
@@ -29,5 +30,6 @@ from django.views.decorators.clickjacking import xframe_options_sameorigin
 @xframe_options_sameorigin
 
 def simple_row_ops(request):
+    print(request.session['A'])
     n = int(request.GET['n'])
     return render(request, 'simple_row_ops.html', context={'range_n':range(1,n+1)})
