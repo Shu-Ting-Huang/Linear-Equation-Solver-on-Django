@@ -31,5 +31,5 @@ from django.views.decorators.clickjacking import xframe_options_sameorigin
 
 def simple_row_ops(request):
     print(request.session['A'])
-    n = int(request.GET['n'])
-    return render(request, 'simple_row_ops.html', context={'range_n':range(1,n+1)})
+    number_of_steps = int(request.GET['number_of_steps'])
+    return render(request, 'simple_row_ops.html', context={'step_range':range(1,number_of_steps+1)})

@@ -7,12 +7,12 @@
     <body onLoad="window.scrollTo(0,10000)">
         $$
         \begin{align*}
-        {% for i in range_n %}
+        {% for k in step_range %}
             {% if not forloop.first %}
                 \longrightarrow
             {% endif %}
             \begin{pmatrix}        
-            {{i}} & 0 \\[4pt]
+            {{k}} & 0 \\[4pt]
             0       & 0
             \end{pmatrix}&
             {% if not forloop.last %}
