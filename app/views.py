@@ -1,3 +1,4 @@
+from app.linear_equation_solver import find_solution
 from django.shortcuts import render
 from django.http import HttpResponse
 
@@ -22,14 +23,15 @@ def index(request):
                     row.append(request.POST.dict()['a_'+str(i)+'_'+str(j)])
                 A.append(row)
             request.session['A'] = A
-            from .linear_equation_solver import find_solution
-            return render(request, 'interactive_row_operations.html')
+            from .linear_equation_solver import row_op_step_num
+            return render(request, 'interactive_row_operations.html',context={'max_step':row_op_step_num(A)})
 
 # Allow the simple_row_ops.html to be shown in iframe
 from django.views.decorators.clickjacking import xframe_options_sameorigin
 @xframe_options_sameorigin
 
 def simple_row_ops(request):
-    print(request.session['A'])
+    A = request.session['A']
     number_of_steps = int(request.GET['number_of_steps'])
-    return render(request, 'simple_row_ops.html', context={'step_range':range(1,number_of_steps+1)})
+    from .linear_equation_solver import find_solution
+    return render(request, 'simple_row_ops.html', context={'row_op':find_solution(A,number_of_steps)})
