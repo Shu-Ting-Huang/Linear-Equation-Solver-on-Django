@@ -26,12 +26,12 @@ def index(request):
             from .linear_equation_solver import row_op_step_num
             return render(request, 'interactive_row_operations.html',context={'max_step':row_op_step_num(A)})
 
-# Allow the simple_row_ops.html to be shown in iframe
+# Allow the row_ops_iframe.html to be shown in iframe
 from django.views.decorators.clickjacking import xframe_options_sameorigin
 @xframe_options_sameorigin
 
-def simple_row_ops(request):
+def row_ops_iframe(request):
     A = request.session['A']
     number_of_steps = int(request.GET['number_of_steps'])
     from .linear_equation_solver import find_solution
-    return render(request, 'simple_row_ops.html', context={'row_op':find_solution(A,number_of_steps)})
+    return render(request, 'row_ops_iframe.html', context={'row_op':find_solution(A,number_of_steps)})

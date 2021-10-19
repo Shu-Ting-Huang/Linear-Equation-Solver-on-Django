@@ -3,5 +3,5 @@ from . import views
 
 urlpatterns = [
     path('',views.index),
-    path('simple_row_ops',views.simple_row_ops),
+    path('row_ops_iframe',views.row_ops_iframe),
 ]
