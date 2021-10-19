@@ -1,6 +1,10 @@
+from app.linear_equation_solver.frontend import output2latex
+from app.linear_equation_solver.backend import RowOpSeq
 from app.linear_equation_solver import find_solution
 from django.shortcuts import render
 from django.http import HttpResponse
+import pickle
+from sympy import Matrix
 
 # Create your views here.
 
@@ -22,16 +26,14 @@ def index(request):
                 for j in range(n):
                     row.append(request.POST.dict()['a_'+str(i)+'_'+str(j)])
                 A.append(row)
-            request.session['A'] = A
-            from .linear_equation_solver import row_op_step_num
-            return render(request, 'interactive_row_operations.html',context={'max_step':row_op_step_num(A)})
+            request.session['row_op_seq'] = pickle.dumps(RowOpSeq(Matrix(A)))
+            return render(request, 'interactive_row_operations.html')
 
 # Allow the row_ops_iframe.html to be shown in iframe
 from django.views.decorators.clickjacking import xframe_options_sameorigin
 @xframe_options_sameorigin
 
 def row_ops_iframe(request):
-    A = request.session['A']
-    number_of_steps = int(request.GET['number_of_steps'])
+    row_op_seq = pickle.loads(request.session['row_op_seq'])
     from .linear_equation_solver import find_solution
-    return render(request, 'row_ops_iframe.html', context={'row_op':find_solution(A,number_of_steps)})
+    return render(request, 'row_ops_iframe.html', context={'row_op':output2latex(row_op_seq)})
