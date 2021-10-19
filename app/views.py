@@ -1,6 +1,5 @@
 from app.linear_equation_solver.frontend import output2latex
 from app.linear_equation_solver.backend import RowOpSeq
-from app.linear_equation_solver import find_solution
 from django.shortcuts import render
 from django.http import HttpResponse
 import pickle
@@ -26,7 +25,8 @@ def index(request):
                 for j in range(n):
                     row.append(request.POST.dict()['a_'+str(i)+'_'+str(j)])
                 A.append(row)
-            request.session['row_op_seq'] = pickle.dumps(RowOpSeq(Matrix(A)))
+            # Initialize the row operation sequence
+            request.session['row_op_seq'] = pickle.dumps(RowOpSeq(Matrix(A)),0).decode()
             return render(request, 'interactive_row_operations.html')
 
 # Allow the row_ops_iframe.html to be shown in iframe
@@ -34,6 +34,5 @@ from django.views.decorators.clickjacking import xframe_options_sameorigin
 @xframe_options_sameorigin
 
 def row_ops_iframe(request):
-    row_op_seq = pickle.loads(request.session['row_op_seq'])
-    from .linear_equation_solver import find_solution
+    row_op_seq = pickle.loads(request.session['row_op_seq'].encode())
     return render(request, 'row_ops_iframe.html', context={'row_op':output2latex(row_op_seq)})
