@@ -3,7 +3,7 @@ from app.linear_equation_solver.backend import RowOpSeq
 from django.shortcuts import render
 from django.http import HttpResponse
 import pickle
-from sympy import Matrix
+from sympy import Matrix, Rational
 
 # Create your views here.
 
@@ -41,6 +41,14 @@ def row_ops_iframe(request):
             next_row_op["op"] = "n<->m"
             next_row_op["row1"] = int(request.GET["row1"])
             next_row_op["row2"] = int(request.GET["row2"])
+            row_op_seq.add_step(next_row_op)
+            del next_row_op
+        if request.GET["op"] == "n->n km": # "+" becomes " " when passed as query string parameters
+            next_row_op = {}
+            next_row_op["op"] = "n->n+km"
+            next_row_op["row"] = int(request.GET["row"])
+            next_row_op["row2"] = int(request.GET["row2"])
+            next_row_op["k"] = Rational(request.GET["k"])
             row_op_seq.add_step(next_row_op)
             del next_row_op
         if request.GET["op"] == "undo":

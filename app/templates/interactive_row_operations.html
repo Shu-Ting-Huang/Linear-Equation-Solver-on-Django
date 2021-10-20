@@ -9,20 +9,37 @@
         <script>
             var step = 0;
             function clear_selections() {
-                document.getElementById("row1").value = "";
-                document.getElementById("row2").value = "";
+                document.getElementById("swap-row1").value = "";
+                document.getElementById("swap-row2").value = "";
+                document.getElementById("add-row"  ).value = "";
+                document.getElementById("add-row2" ).value = "";
+                document.getElementById("add-k"    ).value = "";
                 document.getElementsByTagName("input")[0].checked = false;
                 document.getElementsByTagName("input")[1].checked = false;
                 document.getElementsByTagName("input")[2].checked = false;
-                document.getElementById("n<->m").style.display = "none";
+                document.getElementById("n<->m"  ).style.display = "none";
+                document.getElementById("n->n+km").style.display = "none";
+                document.getElementById("n->kn"  ).style.display = "none";
             }
             function next_step() {
-                var row1 = document.getElementById("row1").value;
-                var row2 = document.getElementById("row2").value;
-                if (row1 != "" && row2 != "" && row1 != row2) {
-                    step += 1;
-                    document.getElementById('iframe').src = "/row_ops_iframe?op=n<->m&row1=" + row1 + "&row2=" + row2;
-                    clear_selections();
+                if (document.getElementById("swap").checked) {
+                    var row1 = document.getElementById("swap-row1").value;
+                    var row2 = document.getElementById("swap-row2").value;
+                    if (row1 != "" && row2 != "" && row1 != row2) {
+                        step += 1;
+                        document.getElementById('iframe').src = "/row_ops_iframe?op=n<->m&row1=" + row1 + "&row2=" + row2;
+                        clear_selections();
+                    }
+                }
+                if (document.getElementById("add").checked) {
+                    var row2 = document.getElementById("add-row2").value;
+                    var row  = document.getElementById("add-row" ).value;
+                    var k    = document.getElementById("add-k"   ).value;
+                    if (row != "" && row2 != "" && row != row2 && k != "") {
+                        step += 1;
+                        document.getElementById('iframe').src = "/row_ops_iframe?op=n->n+km&row=" + row + "&row2=" + row2 + "&k=" + k;
+                        clear_selections();
+                    }
                 }
             }
             function last_step() {
@@ -72,14 +89,14 @@
                 </script>
                 <div id="n<->m" style="display: none;">
                     Swap row
-                    <select id="row1">
+                    <select id="swap-row1">
                         <option value="" selected></option>
                         {% for i in range_m %}
                             <option value="{{i}}">{{ forloop.counter }}</option>
                         {% endfor %}
                     </select>
                     and row
-                    <select id="row2">
+                    <select id="swap-row2">
                         <option value="" selected></option>
                         {% for i in range_m %}
                             <option value="{{i}}">{{ forloop.counter }}</option>
@@ -88,16 +105,16 @@
                 </div>
                 <div id="n->n+km" style="display: none;">
                     Add 
-                    <input id="k" type="text" size="1">
+                    <input id="add-k" type="text" size="1">
                     times of row
-                    <select id="row2">
+                    <select id="add-row2">
                         <option value="" selected></option>
                         {% for i in range_m %}
                             <option value="{{i}}">{{ forloop.counter }}</option>
                         {% endfor %}
                     </select>
                     to row 
-                    <select id="row">
+                    <select id="add-row">
                         <option value="" selected></option>
                         {% for i in range_m %}
                             <option value="{{i}}">{{ forloop.counter }}</option>
