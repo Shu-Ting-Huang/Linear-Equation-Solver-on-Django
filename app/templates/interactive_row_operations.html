@@ -16,6 +16,10 @@
                     document.getElementById('iframe').src = "/row_ops_iframe?op=n<->m&row1=" + row1 + "&row2=" + row2;
                     document.getElementById("row1").value = "";
                     document.getElementById("row2").value = "";
+                    document.getElementsByTagName("input")[0].checked = false;
+                    document.getElementsByTagName("input")[1].checked = false;
+                    document.getElementsByTagName("input")[2].checked = false;
+                    document.getElementById("n<->m").style.display = "none";
                 }
             }
             function last_step() {
@@ -35,20 +39,43 @@
                 <iframe id="iframe" src="/row_ops_iframe" width="200%" height="400px"></iframe>
             </div>
             <div style="margin: auto;">
-                Swap row
-                <select id="row1">
-                    <option value="" selected></option>
-                    {% for i in range_m %}
-                        <option value="{{i}}">{{ forloop.counter }}</option>
-                    {% endfor %}
-                </select>
-                and row
-                <select id="row2">
-                    <option value="" selected></option>
-                    {% for i in range_m %}
-                        <option value="{{i}}">{{ forloop.counter }}</option>
-                    {% endfor %}
-                </select>.
+                <div id="row_op_selection">
+                    <input type="radio" id="swap" name="row_op_type">
+                    <label for="swap">Swap two rows</label><br>
+                    <input type="radio" id="add" name="row_op_type">
+                    <label for="add">Add some multiple a row to another</label><br>
+                    <input type="radio" id="mult" name="row_op_type">
+                    <label for="mult">Multiply a row by a non-zero constant</label><br><br><br>
+                </div>
+                <script>
+                    document.getElementById("row_op_selection").addEventListener('change', function(e) {
+                        if (e.target.id == "swap") {
+                            document.getElementById("n<->m").style.display = "";
+                        }
+                        if (e.target.id == "add") {
+                            document.getElementById("n<->m").style.display = "none";
+                        }
+                        if (e.target.id == "mult") {
+                            document.getElementById("n<->m").style.display = "none";
+                        }
+                    });
+                </script>
+                <div id="n<->m" style="display: none;">
+                    Swap row
+                    <select id="row1">
+                        <option value="" selected></option>
+                        {% for i in range_m %}
+                            <option value="{{i}}">{{ forloop.counter }}</option>
+                        {% endfor %}
+                    </select>
+                    and row
+                    <select id="row2">
+                        <option value="" selected></option>
+                        {% for i in range_m %}
+                            <option value="{{i}}">{{ forloop.counter }}</option>
+                        {% endfor %}
+                    </select>.
+                </div>
                 <br>
                 <br>
                 <br>
