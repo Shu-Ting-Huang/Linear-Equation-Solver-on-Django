@@ -27,7 +27,7 @@ def index(request):
                 A.append(row)
             # Initialize the row operation sequence
             request.session['row_op_seq'] = pickle.dumps(RowOpSeq(Matrix(A)),0).decode()
-            return render(request, 'interactive_row_operations.html')
+            return render(request, 'interactive_row_operations.html',context={'range_m':range(m)})
 
 # Allow the row_ops_iframe.html to be shown in iframe
 from django.views.decorators.clickjacking import xframe_options_sameorigin

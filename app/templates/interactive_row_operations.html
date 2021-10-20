@@ -29,6 +29,23 @@
                 <iframe id="iframe" src="/row_ops_iframe" width="200%" height="400px"></iframe>
             </div>
             <div style="margin: auto;">
+                Swap row
+                <select name="row1">
+                    <option value="" selected></option>
+                    {% for i in range_m %}
+                        <option value="{{i}}">{{ forloop.counter }}</option>
+                    {% endfor %}
+                </select>
+                and row
+                <select name="row2">
+                    <option value="" selected></option>
+                    {% for i in range_m %}
+                        <option value="{{i}}">{{ forloop.counter }}</option>
+                    {% endfor %}
+                </select>.
+                <br>
+                <br>
+                <br>
                 <button type="button" onclick="last_step()">Last Step</button>
                 <button type="button" onclick="next_step()">Next Step</button>
             </div>
