@@ -9,12 +9,14 @@
         <script>
             var step = 0;
             function next_step() {
-                step += 1;
                 var row1 = document.getElementById("row1").value;
                 var row2 = document.getElementById("row2").value;
-                document.getElementById('iframe').src = "/row_ops_iframe?op=n<->m&row1=" + row1 + "&row2=" + row2;
-                document.getElementById("row1").value = "";
-                document.getElementById("row2").value = "";
+                if (row1 != "" && row2 != "" && row1 != row2) {
+                    step += 1;
+                    document.getElementById('iframe').src = "/row_ops_iframe?op=n<->m&row1=" + row1 + "&row2=" + row2;
+                    document.getElementById("row1").value = "";
+                    document.getElementById("row2").value = "";
+                }
             }
             function last_step() {
                 if (step > 0) {
