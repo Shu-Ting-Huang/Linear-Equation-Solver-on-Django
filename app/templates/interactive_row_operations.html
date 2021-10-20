@@ -87,7 +87,22 @@
                     </select>.
                 </div>
                 <div id="n->n+km" style="display: none;">
-                    n->n+km
+                    Add 
+                    <input id="k" type="text" size="1">
+                    times of row
+                    <select id="row2">
+                        <option value="" selected></option>
+                        {% for i in range_m %}
+                            <option value="{{i}}">{{ forloop.counter }}</option>
+                        {% endfor %}
+                    </select>
+                    to row 
+                    <select id="row">
+                        <option value="" selected></option>
+                        {% for i in range_m %}
+                            <option value="{{i}}">{{ forloop.counter }}</option>
+                        {% endfor %}
+                    </select> 
                 </div>
                 <div id="n->kn" style="display: none;">
                     n->kn
