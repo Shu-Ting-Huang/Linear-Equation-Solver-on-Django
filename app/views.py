@@ -51,6 +51,13 @@ def row_ops_iframe(request):
             next_row_op["k"] = Rational(request.GET["k"])
             row_op_seq.add_step(next_row_op)
             del next_row_op
+        if request.GET["op"] == "n->kn":
+            next_row_op = {}
+            next_row_op["op"] = "n->kn"
+            next_row_op["row"] = int(request.GET["row"])
+            next_row_op["k"] = Rational(request.GET["k"])
+            row_op_seq.add_step(next_row_op)
+            del next_row_op
         if request.GET["op"] == "undo":
             row_op_seq.undo()
         request.session['row_op_seq'] = pickle.dumps(row_op_seq,0).decode()

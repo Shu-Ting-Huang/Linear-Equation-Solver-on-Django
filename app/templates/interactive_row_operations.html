@@ -14,6 +14,8 @@
                 document.getElementById("add-row"  ).value = "";
                 document.getElementById("add-row2" ).value = "";
                 document.getElementById("add-k"    ).value = "";
+                document.getElementById("mult-row" ).value = "";
+                document.getElementById("mult-k"   ).value = "";
                 document.getElementsByTagName("input")[0].checked = false;
                 document.getElementsByTagName("input")[1].checked = false;
                 document.getElementsByTagName("input")[2].checked = false;
@@ -38,6 +40,15 @@
                     if (row != "" && row2 != "" && row != row2 && k != "") {
                         step += 1;
                         document.getElementById('iframe').src = "/row_ops_iframe?op=n->n+km&row=" + row + "&row2=" + row2 + "&k=" + k;
+                        clear_selections();
+                    }
+                }
+                if (document.getElementById("mult").checked) {
+                    var row = document.getElementById("mult-row").value;
+                    var k   = document.getElementById("mult-k"  ).value;
+                    if (row != "" && k != "") {
+                        step += 1;
+                        document.getElementById('iframe').src = "/row_ops_iframe?op=n->kn&row=" + row + "&k=" + k;
                         clear_selections();
                     }
                 }
@@ -122,7 +133,14 @@
                     </select> 
                 </div>
                 <div id="n->kn" style="display: none;">
-                    n->kn
+                    Multiply row
+                    <select id="mult-row">
+                        <option value="" selected></option>
+                        {% for i in range_m %}
+                            <option value="{{i}}">{{ forloop.counter }}</option>
+                        {% endfor %}
+                    </select>
+                    by <input id="mult-k" type="text" size="1">
                 </div>
                 <br><br><br>
                 <button type="button" onclick="last_step()">Last Step</button>
