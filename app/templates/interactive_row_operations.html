@@ -54,13 +54,19 @@
                 <script>
                     document.getElementById("row_op_selection").addEventListener('change', function(e) {
                         if (e.target.id == "swap") {
-                            document.getElementById("n<->m").style.display = "";
+                            document.getElementById("n<->m").style.display   = "";
+                            document.getElementById("n->n+km").style.display = "none";
+                            document.getElementById("n->kn").style.display   = "none";
                         }
                         if (e.target.id == "add") {
-                            document.getElementById("n<->m").style.display = "none";
+                            document.getElementById("n<->m").style.display   = "none";
+                            document.getElementById("n->n+km").style.display = "";
+                            document.getElementById("n->kn").style.display   = "none";
                         }
                         if (e.target.id == "mult") {
-                            document.getElementById("n<->m").style.display = "none";
+                            document.getElementById("n<->m").style.display   = "none";
+                            document.getElementById("n->n+km").style.display = "none";
+                            document.getElementById("n->kn").style.display   = "";
                         }
                     });
                 </script>
@@ -80,9 +86,13 @@
                         {% endfor %}
                     </select>.
                 </div>
-                <br>
-                <br>
-                <br>
+                <div id="n->n+km" style="display: none;">
+                    n->n+km
+                </div>
+                <div id="n->kn" style="display: none;">
+                    n->kn
+                </div>
+                <br><br><br>
                 <button type="button" onclick="last_step()">Last Step</button>
                 <button type="button" onclick="next_step()">Next Step</button>
             </div>
