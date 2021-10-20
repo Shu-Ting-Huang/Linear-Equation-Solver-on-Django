@@ -36,8 +36,13 @@ from django.views.decorators.clickjacking import xframe_options_sameorigin
 def row_ops_iframe(request):
     row_op_seq = pickle.loads(request.session['row_op_seq'].encode())
     if request.GET.dict() != {}: # if query string parameters are non-empty
-        if request.GET["op"] == "swap":
-            row_op_seq.add_step({"op":"n<->m","row1":0,"row2":1})
+        if request.GET["op"] == "n<->m":
+            next_row_op = {}
+            next_row_op["op"] = "n<->m"
+            next_row_op["row1"] = int(request.GET["row1"])
+            next_row_op["row2"] = int(request.GET["row2"])
+            row_op_seq.add_step(next_row_op)
+            del next_row_op
         if request.GET["op"] == "undo":
             row_op_seq.undo()
         request.session['row_op_seq'] = pickle.dumps(row_op_seq,0).decode()

@@ -10,7 +10,11 @@
             var step = 0;
             function next_step() {
                 step += 1;
-                document.getElementById('iframe').src = "/row_ops_iframe?op=swap";
+                var row1 = document.getElementById("row1").value;
+                var row2 = document.getElementById("row2").value;
+                document.getElementById('iframe').src = "/row_ops_iframe?op=n<->m&row1=" + row1 + "&row2=" + row2;
+                document.getElementById("row1").value = "";
+                document.getElementById("row2").value = "";
             }
             function last_step() {
                 if (step > 0) {
@@ -30,14 +34,14 @@
             </div>
             <div style="margin: auto;">
                 Swap row
-                <select name="row1">
+                <select id="row1">
                     <option value="" selected></option>
                     {% for i in range_m %}
                         <option value="{{i}}">{{ forloop.counter }}</option>
                     {% endfor %}
                 </select>
                 and row
-                <select name="row2">
+                <select id="row2">
                     <option value="" selected></option>
                     {% for i in range_m %}
                         <option value="{{i}}">{{ forloop.counter }}</option>
