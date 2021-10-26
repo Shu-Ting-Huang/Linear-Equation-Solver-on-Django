@@ -5,6 +5,9 @@ from django.http import HttpResponse
 import pickle
 from sympy import Matrix, Rational
 
+from sympy import __version__ as sympy_version
+assert sympy_version == '1.7.1'
+
 # Create your views here.
 
 def index(request):
